@@ -30,15 +30,3 @@ set GEMINI_API_KEY="your_api_key_here"  # On Windows Powershell: $env:GEMINI_API
 ```bash
 streamlit run app.py
 ```
-
-## Deployment on Google Cloud Run
-
-To deploy this application to Google Cloud Run, execute the following command (assuming your gcloud CLI is authenticated and configured):
-
-```bash
-gcloud run deploy social-bridge \
-    --source . \
-    --port 8080 \
-    --allow-unauthenticated \
-    --set-env-vars GEMINI_API_KEY=YOUR_API_KEY_HERE
-```
