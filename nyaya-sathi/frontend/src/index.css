@@ -91,4 +91,25 @@
   .animation-delay-200 { 
     animation-delay: 200ms; 
   }
+  .neon-border {
+    border: 1px solid var(--color-surface-container-highest);
+    transition: all 0.2s ease-in-out;
+  }
+  .neon-border:focus, .neon-border:focus-within {
+    border-color: var(--color-secondary-container);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--color-secondary-container) 40%, transparent);
+    outline: none;
+  }
+
+  .chat-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-surface-container-highest) transparent;
+  }
+  .chat-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .chat-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-surface-container-highest);
+    border-radius: 3px;
+  }
 }
