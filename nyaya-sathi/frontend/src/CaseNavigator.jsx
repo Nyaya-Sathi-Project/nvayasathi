@@ -26,7 +26,8 @@ const CaseNavigator = () => {
     formData.append('document', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/analyze', formData, {
+      const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await axios.post(`${baseURL}/api/analyze`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -47,12 +48,12 @@ const CaseNavigator = () => {
       <div className="absolute inset-0 bg-primary/10 rounded-full animate-ping opacity-75"></div>
       <div className="absolute inset-4 bg-primary/20 rounded-full animate-ping animation-delay-200"></div>
       <div className="absolute inset-8 bg-primary/30 rounded-full animate-pulse flex items-center justify-center">
-        <FileText size={48} className="text-primary-dark" />
+        <FileText size={48} className="text-primary" />
       </div>
       
       {/* Radar sweeping line effect created with CSS rotation */}
       <motion.div 
-        className="absolute inset-0 rounded-full border-r-4 border-secondary-dark"
+        className="absolute inset-0 rounded-full border-r-4 border-secondary-container"
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
         style={{
@@ -66,10 +67,10 @@ const CaseNavigator = () => {
     <div className="max-w-5xl mx-auto p-4 md:p-8">
       {/* Header with asymmetrical design */}
       <header className="mb-16 pt-8">
-        <p className="text-secondary-dark font-body uppercase tracking-[0.05em] text-sm mb-2 font-medium">
+        <p className="text-secondary font-body uppercase tracking-[0.05em] text-sm mb-2 font-medium">
           Official Government Archive
         </p>
-        <h1 className="text-5xl md:text-6xl text-primary-dark tracking-tight leading-tight staggered-asymmetry">
+        <h1 className="text-5xl md:text-6xl text-primary tracking-tight leading-tight staggered-asymmetry">
           Nyaya-sathi.<br />
           <span className="text-primary/70">The Sovereign Ledger.</span>
         </h1>
@@ -84,7 +85,7 @@ const CaseNavigator = () => {
             {!isUploading && !results && (
               <div className="flex flex-col items-center justify-center text-center space-y-4">
                 <div className="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
-                  <Upload className="text-primary-dark" size={28} />
+                  <Upload className="text-primary" size={28} />
                 </div>
                 <h3 className="text-xl">Submit Document</h3>
                 <p className="text-sm font-body opacity-80">
@@ -101,7 +102,7 @@ const CaseNavigator = () => {
 
                 <button 
                   onClick={() => fileInputRef.current.click()}
-                  className="glass-card px-6 py-3 mt-4 text-primary-dark font-medium rounded-sm border border-primary/10 hover:bg-white w-full transition-colors"
+                  className="glass-card px-6 py-3 mt-4 text-primary font-medium rounded-sm border border-primary/10 hover:bg-white w-full transition-colors"
                 >
                   {file ? file.name : "Select File"}
                 </button>
@@ -119,7 +120,7 @@ const CaseNavigator = () => {
 
             {isUploading && (
               <div className="text-center py-8">
-                <h3 className="text-xl mb-2 text-primary-dark">Scanning Archives...</h3>
+                <h3 className="text-xl mb-2 text-primary">Scanning Archives...</h3>
                 <p className="text-sm font-body opacity-70">Cross-referencing legal precedents.</p>
                 <ScanAnimation />
               </div>
@@ -127,13 +128,13 @@ const CaseNavigator = () => {
 
             {results && (
               <div className="text-center py-8">
-                 <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle2 className="text-secondary-dark" size={32} />
+                 <div className="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="text-secondary" size={32} />
                 </div>
                 <h3 className="text-xl mb-4">Analysis Complete</h3>
                 <button 
                   onClick={() => { setFile(null); setResults(null); }}
-                  className="text-sm font-body text-primary-dark underline decoration-secondary"
+                  className="text-sm font-body text-primary underline decoration-secondary"
                 >
                   Analyze another document
                 </button>
@@ -149,14 +150,14 @@ const CaseNavigator = () => {
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-surface-lowest p-8 md:p-10 shadow-[0_8px_40px_rgba(0,0,60,0.04)] ghost-border"
+                className="bg-surface-container-lowest p-8 md:p-10 shadow-[0_8px_40px_rgba(0,0,60,0.04)] ghost-border"
               >
                 <div className="flex items-start justify-between border-b border-surface-container-highest pb-6 mb-6">
                   <div>
-                    <span className="inline-block px-3 py-1 bg-surface-container-low text-primary-dark text-xs font-bold uppercase tracking-wider mb-3">
+                    <span className="inline-block px-3 py-1 bg-surface-container-low text-primary text-xs font-bold uppercase tracking-wider mb-3">
                       Case File
                     </span>
-                    <h2 className="text-3xl text-primary-dark">{results.caseTitle}</h2>
+                    <h2 className="text-3xl text-primary">{results.caseTitle}</h2>
                   </div>
                   <div className="text-right">
                     <p className="text-xs font-body text-on-surface/60 uppercase tracking-widest mb-1">Docket No.</p>
@@ -165,12 +166,12 @@ const CaseNavigator = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-6 mb-8 pt-2">
-                  <div className="bg-surface-container-low p-5 pl-6 border-l-4 border-secondary">
+                  <div className="bg-surface-container-low p-5 pl-6 border-l-4 border-secondary-container">
                     <div className="flex items-center gap-2 mb-2">
-                      <Calendar size={18} className="text-secondary-dark" />
+                      <Calendar size={18} className="text-secondary" />
                       <h4 className="font-bold text-sm">Hearing Information</h4>
                     </div>
-                    <p className="font-body text-primary-dark">{results.nextHearingDate}</p>
+                    <p className="font-body text-primary">{results.nextHearingDate}</p>
                   </div>
                 </div>
 
@@ -189,7 +190,7 @@ const CaseNavigator = () => {
                   <ul className="space-y-3 font-body">
                     {results.actionItems && results.actionItems.map((item, index) => (
                       <li key={index} className="flex gap-3 items-start bg-surface-container-low p-4 rounded-sm">
-                        <span className="text-secondary-dark font-bold mt-0.5">{index + 1}.</span>
+                        <span className="text-secondary font-bold mt-0.5">{index + 1}.</span>
                         <span>{item}</span>
                       </li>
                     ))}

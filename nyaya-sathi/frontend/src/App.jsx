@@ -10,17 +10,17 @@ function App() {
         
         {/* Logo / Brand */}
         <div className="flex items-center gap-3">
-          <div className="bg-primary p-2 rounded-sm text-surface-lowest">
+          <div className="bg-primary-container p-2 rounded-sm text-surface-container-lowest">
             <Scale size={20} strokeWidth={2.5} />
           </div>
-          <span className="font-headline font-bold tracking-tighter text-xl text-primary-dark">
+          <span className="font-headline font-bold tracking-tighter text-xl text-primary">
             Nyaya-sathi
           </span>
         </div>
 
         {/* Global Navigation Links (Desktop) */}
         <div className="hidden md:flex items-center gap-8 font-body text-sm font-medium">
-          <a href="#" className="flex items-center gap-2 text-primary-dark border-b-2 border-secondary pb-1">
+          <a href="#" className="flex items-center gap-2 text-primary border-b-2 border-secondary-container pb-1">
             <Shield size={16} />
             The Ledger
           </a>
@@ -39,7 +39,7 @@ function App() {
           <button className="text-on-surface/60 hover:text-primary">
             <Settings size={20} />
           </button>
-          <div className="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-dark font-bold font-headline text-xs border border-primary/10">
+          <div className="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold font-headline text-xs border border-primary/10">
             IN
           </div>
         </div>

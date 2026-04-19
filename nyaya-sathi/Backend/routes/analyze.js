@@ -1,14 +1,11 @@
 const express = require('express');
 const multer = require('multer');
-const { GoogleGenAI } = require('@google/genai');
-
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Check API key configuration early if possible, or handle on request
-const ai = new GoogleGenAI({ 
-    apiKey: process.env.GEMINI_API_KEY 
-});
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 router.post('/', upload.single('document'), async (req, res) => {
     try {
@@ -37,24 +34,22 @@ Your response MUST be exclusively a valid JSON object matching this schema:
             }
         };
 
-        const response = await ai.models.generateContent({
-            model: 'gemini-3.1-flash',
-            contents: [
-                {
-                    role: 'user',
-                    parts: [
-                        documentPart,
-                        { text: "Analyze this legal document." }
-                    ]
-                }
-            ],
-            config: {
-                systemInstruction: systemInstruction,
+        const model = genAI.getGenerativeModel({
+            model: "gemini-1.5-flash", 
+            systemInstruction: systemInstruction,
+            generationConfig: {
                 responseMimeType: "application/json"
             }
         });
 
-        const textResponse = response.text;
+        const prompt = "Analyze this legal document.";
+        
+        const result = await model.generateContent([
+            documentPart,
+            prompt
+        ]);
+
+        const textResponse = result.response.text();
         
         let jsonResponse;
         try {
