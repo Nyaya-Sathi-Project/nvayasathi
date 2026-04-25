@@ -26,7 +26,7 @@ const CaseNavigator = () => {
     formData.append('document', file);
 
     try {
-      const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const baseURL = import.meta.env.VITE_API_BASE_URL || 'https://nvayasathi-6qit.onrender.com';
       const response = await axios.post(`${baseURL}/api/analyze`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
