@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, FileText, Calendar, ShieldAlert, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
+import { Upload, FileText, Calendar, ShieldAlert, Shield, CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 
 const CaseNavigator = () => {
   const [file, setFile] = useState(null);
